@@ -6,6 +6,22 @@ const auditSchema = z.object({
   id: z.string(),
   targetUrl: z.string().url(),
   status: auditStatusSchema,
+  httpStatus: z.number().nullable(),
+  responseTimeMs: z.number().nullable(),
+  contentType: z.string(),
+  pageTitle: z.string(),
+  issues: z.array(
+    z.object({
+      rule: z.string(),
+      severity: z.enum(["error", "warning"]),
+      title: z.string(),
+      message: z.string(),
+    }),
+  ),
+  errorMessage: z.string(),
+  createdAt: z.string(),
+  startedAt: z.string().nullable(),
+  completedAt: z.string().nullable(),
 });
 
 const createAuditResponseSchema = z.object({

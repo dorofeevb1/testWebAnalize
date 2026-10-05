@@ -87,6 +87,7 @@ DATABASES = {
         "PORT": env("POSTGRES_PORT"),
     }
 }
+REDIS_URL = env("REDIS_URL")
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 

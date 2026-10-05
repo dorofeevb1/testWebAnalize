@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
 from .models import Audit
+from .queue import enqueue_audit
 
 
 @csrf_exempt
@@ -41,6 +42,8 @@ def create_audit(request):
         status=Audit.Status.QUEUED,
     )
 
+    enqueue_audit(str(audit.id))
+
     return JsonResponse(
         {
             "id": str(audit.id),
@@ -70,5 +73,22 @@ def get_audit(request, audit_id):
             "id": str(audit.id),
             "targetUrl": audit.target_url,
             "status": audit.status,
+            "httpStatus": audit.http_status,
+            "responseTimeMs": audit.response_time_ms,
+            "contentType": audit.content_type,
+            "pageTitle": audit.page_title,
+            "issues": audit.issues,
+            "errorMessage": audit.error_message,
+            "createdAt": audit.created_at.isoformat(),
+            "startedAt": (
+                audit.started_at.isoformat()
+                if audit.started_at
+                else None
+            ),
+            "completedAt": (
+                audit.completed_at.isoformat()
+                if audit.completed_at
+                else None
+            ),
         }
-    )
+)

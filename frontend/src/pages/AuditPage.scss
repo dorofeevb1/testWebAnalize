@@ -16,7 +16,6 @@
 .audit-back {
   display: inline-block;
   margin-bottom: 64px;
-
   color: #111111;
   font-size: 13px;
   font-weight: 700;
@@ -32,7 +31,6 @@
 .audit-label,
 .audit-status-label {
   margin: 0 0 12px;
-
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -43,7 +41,6 @@
 .audit-title {
   max-width: 900px;
   margin: 0;
-
   font-size: clamp(52px, 9vw, 128px);
   font-weight: 800;
   line-height: 0.86;
@@ -55,9 +52,7 @@
   display: grid;
   grid-template-columns: 96px 1fr;
   gap: 24px;
-
   padding: 40px 0;
-
   border-bottom: 1px solid #111111;
 }
 
@@ -70,10 +65,10 @@
 
 .audit-status-value {
   margin: 0;
-
   font-size: 32px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 
@@ -84,17 +79,21 @@
 }
 
 .audit-meta > div {
+  min-width: 0;
   padding: 24px 0;
 }
 
-.audit-meta > div + div {
+.audit-meta > div:nth-child(even) {
   border-left: 1px solid #111111;
   padding-left: 24px;
 }
 
+.audit-meta > div:nth-child(n + 3) {
+  border-top: 1px solid #111111;
+}
+
 .audit-meta dt {
   margin-bottom: 10px;
-
   color: #666666;
   font-size: 12px;
   font-weight: 700;
@@ -104,10 +103,89 @@
 
 .audit-meta dd {
   margin: 0;
-
   font-size: 16px;
   overflow-wrap: anywhere;
 }
+
+/* Issues */
+
+.audit-issues {
+  border-top: 1px solid #111111;
+}
+
+.audit-issues-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-bottom: 1px solid #111111;
+}
+
+.audit-issues-header .audit-label {
+  margin: 0;
+}
+
+.audit-issues-count {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.audit-issue {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 24px;
+  padding: 32px 0;
+  border-bottom: 1px solid #111111;
+}
+
+.audit-issue-marker {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.audit-issue-content {
+  min-width: 0;
+}
+
+.audit-issue-severity,
+.audit-issue-rule {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.audit-issue-severity {
+  margin-bottom: 16px;
+}
+
+.audit-issue-title {
+  margin: 0 0 12px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.audit-issue-message {
+  max-width: 760px;
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.audit-issue-rule {
+  color: #666666;
+}
+
+/* Mobile */
 
 @media (max-width: 600px) {
   .audit-page {
@@ -139,9 +217,25 @@
     grid-template-columns: 1fr;
   }
 
-  .audit-meta > div + div {
-    border-top: 1px solid #111111;
+  .audit-meta > div:nth-child(even) {
     border-left: 0;
     padding-left: 0;
+  }
+
+  .audit-meta > div + div {
+    border-top: 1px solid #111111;
+  }
+
+  .audit-issue {
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+  }
+
+  .audit-issue-marker {
+    font-size: 36px;
+  }
+
+  .audit-issue-title {
+    font-size: 24px;
   }
 }
